@@ -12,6 +12,7 @@ import java.io.IOException;
 public class AuthController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("AuthController");
         req.getRequestDispatcher("/WEB-INF/views/auth.jsp").forward(req, resp);
     }
 }
