@@ -1,194 +1,188 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Minimal Jasper report for PDF bill printing (A4) -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-              name="OceanViewResort_Bill" pageWidth="595" pageHeight="842" columnWidth="555"
-              leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f5c97b2-7fd7-4d76-8f0d-9a63db6df9f0">
-
-    <parameter name="reservationId" class="java.lang.Integer"/>
-    <parameter name="customerName" class="java.lang.String"/>
-    <parameter name="roomNo" class="java.lang.String"/>
-    <parameter name="roomType" class="java.lang.String"/>
-    <parameter name="nights" class="java.lang.Integer"/>
-    <parameter name="pricePerNight" class="java.math.BigDecimal"/>
-    <parameter name="subTotal" class="java.math.BigDecimal"/>
-    <parameter name="serviceCharge" class="java.math.BigDecimal"/>
-    <parameter name="tax" class="java.math.BigDecimal"/>
-    <parameter name="total" class="java.math.BigDecimal"/>
-    <parameter name="status" class="java.lang.String"/>
-    <parameter name="paidAt" class="java.lang.String"/>
-    <parameter name="generatedAt" class="java.lang.String"/>
-
-    <title>
-        <band height="90">
-            <staticText>
-                <reportElement x="0" y="0" width="555" height="24"/>
-                <textElement textAlignment="Center">
-                    <font size="18" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Ocean View Resort]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="0" y="26" width="555" height="18"/>
-                <textElement textAlignment="Center">
-                    <font size="12" isBold="true"/>
-                </textElement>
-                <text><![CDATA[Reservation Bill / Invoice]]></text>
-            </staticText>
-
-            <staticText>
-                <reportElement x="0" y="52" width="90" height="16"/>
-                <textElement><font isBold="true"/></textElement>
-                <text><![CDATA[Bill For:]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="92" y="52" width="300" height="16"/>
-                <textFieldExpression><![CDATA[$P{customerName}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement x="400" y="52" width="80" height="16"/>
-                <textElement><font isBold="true"/></textElement>
-                <text><![CDATA[Generated:]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="480" y="52" width="75" height="16"/>
-                <textElement textAlignment="Right"/>
-                <textFieldExpression><![CDATA[$P{generatedAt}]]></textFieldExpression>
-            </textField>
-
-            <line>
-                <reportElement x="0" y="78" width="555" height="1"/>
-            </line>
-        </band>
-    </title>
-
-    <detail>
-        <band height="250">
-
-            <staticText>
-                <reportElement x="0" y="0" width="120" height="16"/>
-                <textElement><font isBold="true"/></textElement>
-                <text><![CDATA[Reservation ID:]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="130" y="0" width="200" height="16"/>
-                <textFieldExpression><![CDATA[$P{reservationId}]]></textFieldExpression>
-            </textField>
-
-            <staticText>
-                <reportElement x="0" y="22" width="120" height="16"/>
-                <textElement><font isBold="true"/></textElement>
-                <text><![CDATA[Room:]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="130" y="22" width="200" height="16"/>
-                <textFieldExpression><![CDATA[$P{roomNo} + " (" + $P{roomType} + ")"]]></textFieldExpression>
-            </textField>
-
-            <staticText>
-                <reportElement x="0" y="44" width="120" height="16"/>
-                <textElement><font isBold="true"/></textElement>
-                <text><![CDATA[Nights:]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="130" y="44" width="200" height="16"/>
-                <textFieldExpression><![CDATA[$P{nights}]]></textFieldExpression>
-            </textField>
-
-            <staticText>
-                <reportElement x="0" y="66" width="120" height="16"/>
-                <textElement><font isBold="true"/></textElement>
-                <text><![CDATA[Rate / Night:]]></text>
-            </staticText>
-            <textField pattern="#,##0.00">
-                <reportElement x="130" y="66" width="200" height="16"/>
-                <textFieldExpression><![CDATA[$P{pricePerNight}]]></textFieldExpression>
-            </textField>
-
-            <staticText>
-                <reportElement x="0" y="88" width="120" height="16"/>
-                <textElement><font isBold="true"/></textElement>
-                <text><![CDATA[Payment Status:]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="130" y="88" width="200" height="16"/>
-                <textFieldExpression><![CDATA[$P{status} + ( ($P{paidAt} == null || $P{paidAt}.isBlank()) ? "" : ("  (" + $P{paidAt} + ")") )]]></textFieldExpression>
-            </textField>
-
-            <line>
-                <reportElement x="0" y="120" width="555" height="1"/>
-            </line>
-
-            <staticText>
-                <reportElement x="0" y="135" width="200" height="18"/>
-                <textElement><font isBold="true"/></textElement>
-                <text><![CDATA[Charges]]></text>
-            </staticText>
-
-            <staticText>
-                <reportElement x="0" y="160" width="200" height="16"/>
-                <text><![CDATA[Sub Total]]></text>
-            </staticText>
-            <textField pattern="#,##0.00">
-                <reportElement x="355" y="160" width="200" height="16"/>
-                <textElement textAlignment="Right"/>
-                <textFieldExpression><![CDATA[$P{subTotal}]]></textFieldExpression>
-            </textField>
-
-            <staticText>
-                <reportElement x="0" y="182" width="200" height="16"/>
-                <text><![CDATA[Service Charge (10%)]]></text>
-            </staticText>
-            <textField pattern="#,##0.00">
-                <reportElement x="355" y="182" width="200" height="16"/>
-                <textElement textAlignment="Right"/>
-                <textFieldExpression><![CDATA[$P{serviceCharge}]]></textFieldExpression>
-            </textField>
-
-            <staticText>
-                <reportElement x="0" y="204" width="200" height="16"/>
-                <text><![CDATA[Tax (2%)]]></text>
-            </staticText>
-            <textField pattern="#,##0.00">
-                <reportElement x="355" y="204" width="200" height="16"/>
-                <textElement textAlignment="Right"/>
-                <textFieldExpression><![CDATA[$P{tax}]]></textFieldExpression>
-            </textField>
-
-            <line>
-                <reportElement x="0" y="226" width="555" height="1"/>
-            </line>
-
-            <staticText>
-                <reportElement x="0" y="232" width="200" height="20"/>
-                <textElement><font isBold="true" size="13"/></textElement>
-                <text><![CDATA[Total]]></text>
-            </staticText>
-            <textField pattern="#,##0.00">
-                <reportElement x="355" y="232" width="200" height="20"/>
-                <textElement textAlignment="Right">
-                    <font isBold="true" size="13"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
-            </textField>
-
-        </band>
-    </detail>
-
-    <pageFooter>
-        <band height="30">
-            <line>
-                <reportElement x="0" y="0" width="555" height="1"/>
-            </line>
-            <staticText>
-                <reportElement x="0" y="8" width="555" height="16"/>
-                <textElement textAlignment="Center">
-                    <font size="9"/>
-                </textElement>
-                <text><![CDATA[Thank you for choosing Ocean View Resort]]></text>
-            </staticText>
-        </band>
-    </pageFooter>
-
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OceanViewResort_Bill" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f5c97b2-7fd7-4d76-8f0d-9a63db6df9f0">
+	<parameter name="reservationId" class="java.lang.Integer"/>
+	<parameter name="customerName" class="java.lang.String"/>
+	<parameter name="roomNo" class="java.lang.String"/>
+	<parameter name="roomType" class="java.lang.String"/>
+	<parameter name="nights" class="java.lang.Integer"/>
+	<parameter name="pricePerNight" class="java.math.BigDecimal"/>
+	<parameter name="subTotal" class="java.math.BigDecimal"/>
+	<parameter name="serviceCharge" class="java.math.BigDecimal"/>
+	<parameter name="tax" class="java.math.BigDecimal"/>
+	<parameter name="total" class="java.math.BigDecimal"/>
+	<parameter name="status" class="java.lang.String"/>
+	<parameter name="paidAt" class="java.lang.String"/>
+	<parameter name="generatedAt" class="java.lang.String"/>
+	<title>
+		<band height="90">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="24" uuid="6aba5c07-f9b8-4e54-9f1f-14a12d7a514f"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ocean View Resort]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="26" width="555" height="18" uuid="d1607f8b-e6dd-4a52-bfe6-2cdb6b6de537"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reservation Bill / Invoice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="52" width="90" height="16" uuid="6d598eb1-e0bb-4b77-91db-a8259ce0c29a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bill For:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="92" y="52" width="300" height="16" uuid="dff1b2f7-8e1d-4556-a416-4f629c029848"/>
+				<textFieldExpression><![CDATA[$P{customerName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="400" y="52" width="80" height="16" uuid="2df67ac0-517c-4b54-8831-d607c0b041c5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Generated:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="480" y="52" width="75" height="16" uuid="25008c2d-e6d5-418b-9a0c-d4590d974bbf"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{generatedAt}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="78" width="555" height="1" uuid="8837f2f5-9b2e-4528-9167-2f39c43d0f59"/>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="250">
+			<staticText>
+				<reportElement x="0" y="0" width="120" height="16" uuid="aa87c589-2c00-4459-85b6-6bde6ed5f91c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reservation ID:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="0" width="200" height="16" uuid="46d0ba0d-1483-4669-964f-b5e6ce2ddaae"/>
+				<textFieldExpression><![CDATA[$P{reservationId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="22" width="120" height="16" uuid="bb758b7d-70a5-4518-85c1-0865bb07649d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Room:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="22" width="200" height="16" uuid="def1a937-d7b0-4b6f-a7e7-18ecedf5c1f4"/>
+				<textFieldExpression><![CDATA[$P{roomNo} + " (" + $P{roomType} + ")"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="44" width="120" height="16" uuid="d144c696-be8f-401b-ad62-c34b9dc9be1b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nights:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="44" width="200" height="16" uuid="62ac43b7-a2c6-49f0-90a1-23e412a023a5"/>
+				<textFieldExpression><![CDATA[$P{nights}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="66" width="120" height="16" uuid="0a68d4e3-45da-4cfd-b017-864c748f700f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rate / Night:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="130" y="66" width="200" height="16" uuid="91bdfd17-934c-420f-9dc0-36ba4223086d"/>
+				<textFieldExpression><![CDATA[$P{pricePerNight}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="88" width="120" height="16" uuid="aa57811f-a715-4aad-bd5f-65aff346de0a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment Status:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="88" width="200" height="16" uuid="d39843f5-c9b4-47b3-9dff-e49c82c005b6"/>
+				<textFieldExpression><![CDATA[$P{status} + ( ($P{paidAt} == null || $P{paidAt}.isBlank()) ? "" : ("  (" + $P{paidAt} + ")") )]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="120" width="555" height="1" uuid="e59a4e11-1a51-4bf7-9af9-da59f31636e2"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="135" width="200" height="18" uuid="3088598e-6749-4b92-8cbb-a187c070bd8b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Charges]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="200" height="16" uuid="f4c35dcb-6bc0-494f-a75f-13e2ba223c5c"/>
+				<text><![CDATA[Sub Total]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="355" y="160" width="200" height="16" uuid="10360053-12c7-4630-a954-e3ad879549ba"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{subTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="182" width="200" height="16" uuid="ca9fbc0f-e66e-4c17-aa63-e9933d4fe1f2"/>
+				<text><![CDATA[Service Charge (10%)]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="355" y="182" width="200" height="16" uuid="7652201e-5bdb-48e9-8745-f4d38c2c51e5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{serviceCharge}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="204" width="200" height="16" uuid="70bba8f6-95e8-4ff6-9c14-2bebcfb2d826"/>
+				<text><![CDATA[Tax (2%)]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="355" y="204" width="200" height="16" uuid="7f02353a-77f0-4fbe-be2b-546f70d66d03"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{tax}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="226" width="555" height="1" uuid="c9b3d6b7-d29c-4510-8bff-8d447dfce6db"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="230" width="200" height="20" uuid="9bfb64b9-40a9-4067-b693-fb2b977f10eb"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="355" y="229" width="200" height="20" uuid="14fc3735-df43-459f-9a7c-974c239ebd27"/>
+				<textElement textAlignment="Right">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="f1352757-bb9a-4051-aea0-b09b1cfe6820"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="8" width="555" height="16" uuid="e4fda450-dab7-4755-890a-75ce607c75ee"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Thank you for choosing Ocean View Resort]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
 </jasperReport>

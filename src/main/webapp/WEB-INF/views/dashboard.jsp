@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+ <%--   <div class="col-md-4">
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Help</h5>
@@ -51,7 +51,7 @@
                 <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/help">Open</a>
             </div>
         </div>
-    </div>
+    </div>--%>
 </div>
 
 <%@ include file="common/footer.jspf" %>
