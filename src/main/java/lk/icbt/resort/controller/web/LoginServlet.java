@@ -35,9 +35,9 @@ public class LoginServlet extends HttpServlet {
             req.setAttribute("error", ve.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         } catch (Exception e) {
-            e.printStackTrace();
             req.setAttribute("error", "Login failed. Please try again.");
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+            e.printStackTrace();
         }
     }
 }
