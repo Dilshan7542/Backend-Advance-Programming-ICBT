@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/**
- * Loads application.properties from classpath.
- */
 public final class AppConfig {
     private static final Properties PROPS = new Properties();
 

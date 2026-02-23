@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Simple JDBC connection provider.
- * For CIS6003 this is enough; in real apps use a pooled DataSource.
- */
 public final class DBConnection {
 
     private DBConnection() {}

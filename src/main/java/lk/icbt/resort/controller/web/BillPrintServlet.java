@@ -16,10 +16,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Streams a PDF bill generated using JasperReports.
- * URL: /billing/print?id={reservationId}
- */
 @WebServlet("/billing/print")
 public class BillPrintServlet extends HttpServlet {
 

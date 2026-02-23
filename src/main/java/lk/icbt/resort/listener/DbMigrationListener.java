@@ -5,10 +5,6 @@ import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import lk.icbt.resort.util.CrudUtil;
 
-/**
- * Small DB migration to keep the assignment project easy to run.
- * Creates bills table if it does not exist (so payment status works even if you used the old SQL).
- */
 @WebListener
 public class DbMigrationListener implements ServletContextListener {
 

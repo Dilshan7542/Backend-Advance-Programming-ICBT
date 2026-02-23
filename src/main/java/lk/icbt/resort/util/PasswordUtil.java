@@ -4,10 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Basic SHA-256 hashing for demo purposes.
- * Also supports legacy/plain password in DB (as per provided seed script).
- */
 public final class PasswordUtil {
     private PasswordUtil() {}
 
