@@ -1,11 +1,13 @@
 package lk.icbt.resort.controller.web;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lk.icbt.resort.model.dto.BillView;
+import lk.icbt.resort.model.entity.Reservation;
 import lk.icbt.resort.model.exception.ValidationException;
 import lk.icbt.resort.model.service.ServiceFactory;
 
@@ -19,7 +21,9 @@ public class BillingServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(req.getParameter("id"));
             BillView bill = ServiceFactory.billingService().generateBill(id);
+            Reservation reservation = ServiceFactory.reservationService().getById(bill.getReservationId());
             req.setAttribute("bill", bill);
+            req.setAttribute("resvSatus", reservation.getStatus());
             req.getRequestDispatcher("/WEB-INF/views/billing/bill.jsp").forward(req, resp);
         } catch (ValidationException ve) {
             ve.printStackTrace();

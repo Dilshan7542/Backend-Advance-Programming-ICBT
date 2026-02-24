@@ -52,19 +52,27 @@
             <a class="btn btn-outline-primary" target="_blank"
                href="${pageContext.request.contextPath}/billing/print?id=${bill.reservationId}">Print (PDF)</a>
 
-            <form method="post" action="${pageContext.request.contextPath}/billing" class="d-inline">
-                <input type="hidden" name="id" value="${bill.reservationId}" />
-                <c:choose>
-                    <c:when test="${bill.status eq 'PAID'}">
-                        <input type="hidden" name="status" value="UNPAID" />
-                        <button class="btn btn-outline-warning" type="submit" onclick="return confirm('Mark this bill as UNPAID?')">Mark as Unpaid</button>
-                    </c:when>
-                    <c:otherwise>
-                        <input type="hidden" name="status" value="PAID" />
-                        <button class="btn btn-success" type="submit" onclick="return confirm('Mark this bill as PAID?')">Mark as Paid</button>
-                    </c:otherwise>
-                </c:choose>
-            </form>
+            <c:if test="${empty resvSatus or not fn:startsWith(resvSatus, 'CANCEL')}">
+                <form method="post" action="${pageContext.request.contextPath}/billing" class="d-inline">
+                    <input type="hidden" name="id" value="${bill.reservationId}" />
+                    <c:choose>
+                        <c:when test="${bill.status eq 'PAID'}">
+                            <input type="hidden" name="status" value="UNPAID" />
+                            <button class="btn btn-outline-warning" type="submit"
+                                    onclick="return confirm('Mark this bill as UNPAID?')">
+                                Mark as Unpaid
+                            </button>
+                        </c:when>
+                        <c:otherwise>
+                            <input type="hidden" name="status" value="PAID" />
+                            <button class="btn btn-success" type="submit"
+                                    onclick="return confirm('Mark this bill as PAID?')">
+                                Mark as Paid
+                            </button>
+                        </c:otherwise>
+                    </c:choose>
+                </form>
+            </c:if>
 
             <a class="btn btn-secondary" href="${pageContext.request.contextPath}/reservations">Back</a>
         </div>
