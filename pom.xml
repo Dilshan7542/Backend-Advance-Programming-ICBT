@@ -5,7 +5,7 @@
   <groupId>lk.icbt</groupId>
   <artifactId>ocean-view-resort</artifactId>
   <packaging>war</packaging>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <name>ocean-view-resort Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
