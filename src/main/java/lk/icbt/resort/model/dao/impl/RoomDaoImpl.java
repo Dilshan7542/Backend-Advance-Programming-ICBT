@@ -69,6 +69,29 @@ public class RoomDaoImpl implements RoomDao {
 
         return cnt != null && cnt > 0;
     }
+    @Override
+    public List<Room> findUnavailableBetween(LocalDate checkIn, LocalDate checkOut) throws Exception {
+        // Overlap rule: existing.check_in < new.checkOut AND existing.check_out > new.checkIn
+        // Unavailable if:
+        //  - room is NOT in AVAILABLE state (e.g., MAINTENANCE)
+        //  - OR the room has an overlapping CONFIRMED reservation
+        String sql = """
+            SELECT rm.room_id, rm.room_no, rm.room_type, rm.ac_type, rm.price_per_night, rm.status
+            FROM rooms rm
+            WHERE rm.status <> 'AVAILABLE'
+               OR EXISTS (
+                SELECT 1
+                FROM reservations r
+                WHERE r.room_id = rm.room_id
+                  AND r.status='CONFIRMED'
+                  AND r.check_in < ?
+                  AND r.check_out > ?
+               )
+            ORDER BY rm.room_no
+            """;
+
+        return queryList(sql, java.sql.Date.valueOf(checkOut), java.sql.Date.valueOf(checkIn));
+    }
 
     @Override
     public Room findById(int roomId) throws Exception {

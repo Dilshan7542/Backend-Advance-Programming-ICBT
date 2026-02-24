@@ -30,4 +30,14 @@ public class RoomServiceImpl implements RoomService {
         }
         return DaoFactory.roomDao().findAvailableBetween(checkIn, checkOut);
     }
+    @Override
+    public List<Room> getUnavailableBetween(LocalDate checkIn, LocalDate checkOut) throws Exception {
+        if (checkIn == null || checkOut == null) {
+            throw new ValidationException("Check-in and check-out dates are required");
+        }
+        if (!checkOut.isAfter(checkIn)) {
+            throw new ValidationException("Check-out must be after check-in");
+        }
+        return DaoFactory.roomDao().findUnavailableBetween(checkIn, checkOut);
+    }
 }
