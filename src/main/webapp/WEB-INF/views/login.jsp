@@ -17,7 +17,7 @@
 <body class="bg-light">
 <main class="row vh-100">
     <section class="col-6 p-0 m-0">
-        <img src="${pageContext.request.contextPath}/assets/img/loging.jpg" alt="" class="w-100" style="max-height: 100vh">
+        <img src="${pageContext.request.contextPath}/assets/img/loging.jpg" alt="login image" class="w-100" style="max-height: 100vh">
     </section>
     <section class="col-6">
         <div>
