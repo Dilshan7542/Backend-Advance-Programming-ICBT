@@ -14,12 +14,11 @@ public class DbMigrationListener implements ServletContextListener {
             System.out.println("App Initialized...!!!");
         } catch (Exception e) {
             e.printStackTrace();
-            // If DB user doesn't have permission, the app can still run without payment status persistence.
         }
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        // no-op
+        System.out.println("System Closed...!!!");
     }
 }

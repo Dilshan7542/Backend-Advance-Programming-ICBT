@@ -91,5 +91,5 @@ ON DUPLICATE KEY UPDATE room_no=room_no;
 -- 7) Seed admin user
 -- NOTE: for now password_hash is plain text "admin123" (we will replace with hashing in coding step)
 INSERT INTO users (username, password_hash, role) VALUES
-('admin', 'admin123', 'MANAGER')
+('manager', 'manager', 'MANAGER')
 ON DUPLICATE KEY UPDATE username=username;
