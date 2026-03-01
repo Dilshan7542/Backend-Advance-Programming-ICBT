@@ -39,3 +39,4 @@ build/
 .DS_Store
 /.idea/git_toolbox_prj.xml
 /src/main/resources/reports/bill.jasper
+/.mvn/
