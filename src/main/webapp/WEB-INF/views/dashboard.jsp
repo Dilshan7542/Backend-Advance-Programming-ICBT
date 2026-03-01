@@ -27,7 +27,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">Reservations</h5>
-                            <p class="card-text">Create reservations (prevents double-booking automatically).</p>
+                            <p class="card-text">Create reservations.</p>
                             <a class="btn btn-primary" href="${pageContext.request.contextPath}/reservations">Open</a>
                         </div>
                     </div>
