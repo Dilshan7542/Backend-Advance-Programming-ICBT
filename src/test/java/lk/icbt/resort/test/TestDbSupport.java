@@ -15,6 +15,7 @@ public final class TestDbSupport {
 
     public static void assumeDbUp() {
         try {
+            System.out.println("Test===>> DB");
             Integer one = CrudUtil.executeQuery("SELECT 1", rs -> {
                 rs.next();
                 return rs.getInt(1);

@@ -14,7 +14,7 @@ public class AuthServiceIT {
         TestDbSupport.assumeDbUp();
 
         // schema.sql seeds: username=admin, password_hash=admin123
-        User user = ServiceFactory.authService().login("admin", "admin123");
+        User user = ServiceFactory.authService().login("admin", "admin");
 
         assertNotNull(user);
         assertEquals("admin", user.getUsername());
