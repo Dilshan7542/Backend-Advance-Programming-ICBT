@@ -73,12 +73,12 @@ public class ReservationServiceIT {
 
         Room room = TestDbSupport.pickAvailableRoom(checkIn, checkOut);
 
-        // First reservation (should pass)
+        System.out.println("First reservation (should pass)");
         reservation1Id = ServiceFactory.reservationService()
                 .create(customer1Id, room.getRoomId(), checkIn, checkOut);
         assertTrue(reservation1Id > 0);
 
-        // Second reservation for same room & overlapping dates (should fail)
+        System.out.println("Second reservation for same room & overlapping dates (should fail)");
         ValidationException ex = assertThrows(ValidationException.class, () ->
                 ServiceFactory.reservationService().create(customer2Id, room.getRoomId(), checkIn.plusDays(1), checkOut.minusDays(1))
         );

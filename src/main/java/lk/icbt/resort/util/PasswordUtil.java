@@ -7,6 +7,9 @@ import java.security.NoSuchAlgorithmException;
 public final class PasswordUtil {
     private PasswordUtil() {}
 
+  /*  public static void main(String[] args) {
+        System.out.println(matches("manager", "6ee4a469cd4e91053847f5d3fcb61dbcc91e8f0ef10be7748da4c4a1ba382d17"));
+    }*/
     public static String sha256(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
