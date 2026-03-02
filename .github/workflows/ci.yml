@@ -17,4 +17,4 @@ jobs:
           cache: maven
 
       - name: Run unit tests
-        run: mvn -q clean test
+        run: mvn clean test
