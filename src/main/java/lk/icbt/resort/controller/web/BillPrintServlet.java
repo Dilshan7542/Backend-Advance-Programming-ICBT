@@ -42,7 +42,6 @@ public class BillPrintServlet extends HttpServlet {
             params.put("paidAt", bill.getPaidAt() == null ? "" : bill.getPaidAt().format(TS_FMT));
             params.put("generatedAt", LocalDateTime.now().format(TS_FMT));
 
-            // Load JRXML from classpath (src/main/resources/reports/bill.jrxml)
             try (InputStream jrxml = Thread.currentThread().getContextClassLoader()
                     .getResourceAsStream("reports/bill.jrxml")) {
                 if (jrxml == null) {
@@ -66,7 +65,6 @@ public class BillPrintServlet extends HttpServlet {
             resp.sendError(400, "Invalid reservation id");
         } catch (Exception e) {
             e.printStackTrace();
-            // Fail safely back to bill page
             resp.sendRedirect(req.getContextPath() + "/billing?id=" + req.getParameter("id"));
         }
     }
