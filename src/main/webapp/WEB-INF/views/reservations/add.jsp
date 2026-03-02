@@ -58,7 +58,7 @@
                         <select class="form-select" disabled>
                             <option>-- Select dates first --</option>
                         </select>
-                        <div class="form-text text-danger">Please select dates and click “Find Available Rooms”.</div>
+                        <div class="form-text text-danger">Please select dates and click Find Available Rooms.</div>
                     </c:otherwise>
                 </c:choose>
             </div>

@@ -12,26 +12,26 @@ public final class CrudUtil {
     private CrudUtil() {}
 
     public static int executeUpdate(String sql, Object... params) throws SQLException {
-        try (Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+       Connection con = DBConnection.getInstance().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
             setParams(ps, params);
             return ps.executeUpdate();
-        }
+
     }
 
     public static <T> T executeQuery(String sql, ResultSetHandler<T> handler, Object... params) throws SQLException {
-        try (Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+        Connection con = DBConnection.getInstance().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
             setParams(ps, params);
             try (ResultSet rs = ps.executeQuery()) {
                 return handler.handle(rs);
-            }
+
         }
     }
 
     public static long executeInsertAndReturnKey(String sql, Object... params) throws SQLException {
-        try (Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        Connection con = DBConnection.getInstance().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             setParams(ps, params);
             ps.executeUpdate();
             try (ResultSet keys = ps.getGeneratedKeys()) {
@@ -40,7 +40,7 @@ public final class CrudUtil {
                 }
                 return -1;
             }
-        }
+
     }
 
     private static void setParams(PreparedStatement ps, Object... params) throws SQLException {
