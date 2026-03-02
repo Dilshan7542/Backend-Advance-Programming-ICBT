@@ -17,9 +17,5 @@ public interface ReservationService {
 
     Reservation getById(int reservationId) throws Exception;
 
-    /**
-     * Cancel a reservation.
-     * Business rule: if the reservation is PAID, only MANAGER/ADMIN can cancel, and a reason is required.
-     */
     boolean cancel(int reservationId, User actor, String reason) throws Exception;
 }

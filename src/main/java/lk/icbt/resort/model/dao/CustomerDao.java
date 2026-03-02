@@ -12,6 +12,5 @@ public interface CustomerDao {
     List<Customer> findAll() throws Exception;
     List<Customer> search(String keyword) throws Exception;
 
-    /** Customers who have not yet been used in a reservation (avoid multiple reservations per customer record) */
     List<Customer> findWithoutReservations() throws Exception;
 }

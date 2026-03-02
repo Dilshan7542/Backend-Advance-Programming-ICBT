@@ -30,7 +30,6 @@ public class ReservationServiceImpl implements ReservationService {
         if (last != null) {
             boolean paid = last.getBillStatus() != null && last.getBillStatus().equalsIgnoreCase("PAID");
             boolean checkoutPassed = last.getCheckOut() != null && last.getCheckOut().isBefore(LocalDate.now());
-            // If you want to allow on the same day of checkout, use: !last.getCheckOut().isAfter(LocalDate.now())
 
             if (!(paid && checkoutPassed)) {
                 throw new ValidationException(
@@ -38,17 +37,17 @@ public class ReservationServiceImpl implements ReservationService {
                 );
             }
         }
-        // 1) Prevent accidental double-submit duplicates
+        // check accidental double-submit duplicates
         if (DaoFactory.reservationDao().existsDuplicateConfirmed(customerId, roomId, checkIn, checkOut)) {
             throw new ValidationException("This reservation already exists (duplicate submission)");
         }
 
-        // 2) Prevent same customer having overlapping stays (business rule)
+        // check same customer having overlapping stays (business rule)
         if (DaoFactory.reservationDao().customerHasOverlapConfirmed(customerId, checkIn, checkOut)) {
             throw new ValidationException("This customer already has another CONFIRMED reservation for the selected dates");
         }
 
-        // 3) Prevent double-booking for the same room/date range
+        // check double-booking for the same room/date range
         boolean available = DaoFactory.roomDao().isAvailableBetween(roomId, checkIn, checkOut);
         if (!available) {
             throw new ValidationException("Selected room is not available for the given dates");
@@ -123,7 +122,6 @@ public class ReservationServiceImpl implements ReservationService {
                 DaoFactory.reservationActionDao().insert(action);
             } catch (Exception e) {
                 e.printStackTrace();
-                // Do not block main business flow if audit insert fails
             }
         }
 

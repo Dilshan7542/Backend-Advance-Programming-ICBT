@@ -26,7 +26,6 @@ public class RoomDaoImpl implements RoomDao {
 
     @Override
     public List<Room> findAvailableBetween(LocalDate checkIn, LocalDate checkOut) throws Exception {
-        // Overlap rule: existing.check_in < new.checkOut AND existing.check_out > new.checkIn
         String sql = """
                 SELECT rm.room_id, rm.room_no, rm.room_type, rm.ac_type, rm.price_per_night, rm.status
                 FROM rooms rm

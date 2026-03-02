@@ -12,6 +12,5 @@ public interface CustomerService {
     List<Customer> getAll() throws Exception;
     List<Customer> search(String keyword) throws Exception;
 
-    /** Used in Reservation > Add page to prevent selecting customers who already have a reservation */
     List<Customer> getSelectableForReservation() throws Exception;
 }

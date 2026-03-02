@@ -16,7 +16,7 @@ public final class SecurityUtil {
     public static boolean isManager(User user) {
         if (user == null || user.getRole() == null) return false;
         String role = user.getRole().trim().toUpperCase();
-        // Treat ADMIN as manager-equivalent as well
+
         return "MANAGER".equals(role) || "ADMIN".equals(role);
     }
 }

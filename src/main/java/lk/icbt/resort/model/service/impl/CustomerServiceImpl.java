@@ -28,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
     public boolean delete(int customerId) throws Exception {
         if (customerId <= 0) throw new ValidationException("Customer ID is required");
 
-        // Business rule: customer cannot be deleted if they already have any reservation record.
+        //customer cannot be deleted if they already have any reservation record.
         if (DaoFactory.reservationDao().existsAnyForCustomer(customerId)) {
             throw new ValidationException("Cannot delete customer. This customer already has reservations.");
         }

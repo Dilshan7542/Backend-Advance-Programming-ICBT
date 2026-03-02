@@ -22,7 +22,6 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public boolean update(Customer customer) throws Exception {
-        // Business rule: NIC must not be editable once saved.
         String sql = "UPDATE customers SET full_name=?, phone=?, email=? WHERE customer_id=?";
         int rows = CrudUtil.executeUpdate(sql,
                 customer.getFullName(),

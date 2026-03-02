@@ -22,9 +22,6 @@ public final class PasswordUtil {
         }
     }
 
-    /**
-     * Matches either: (1) plain stored password, or (2) SHA-256 stored password.
-     */
     public static boolean matches(String rawPassword, String storedPasswordHashOrPlain) {
         if (rawPassword == null || storedPasswordHashOrPlain == null) return false;
         if (storedPasswordHashOrPlain.equals(rawPassword)) return true; // legacy/plain

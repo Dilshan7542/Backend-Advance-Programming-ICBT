@@ -20,11 +20,13 @@ import java.io.IOException;
 public class AuthFilter implements Filter {
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        Object user = (req.getSession(false) != null) ? req.getSession(false).getAttribute(AppConstants.SESSION_USER) : null;
+        Object user = (req.getSession(false) != null) ? req.getSession(false)
+                .getAttribute(AppConstants.SESSION_USER) : null;
         if (user == null) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;

@@ -85,7 +85,6 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public boolean customerHasOverlapConfirmed(int customerId, LocalDate checkIn, LocalDate checkOut) throws Exception {
-        // overlap: existing.check_in < new.checkOut AND existing.check_out > new.checkIn
         String sql = """
                 SELECT COUNT(*) AS cnt
                 FROM reservations r

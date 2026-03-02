@@ -27,12 +27,12 @@ public class BillingServiceImpl implements BillingService {
         BigDecimal rate = room.getPricePerNight();
         BigDecimal subTotal = rate.multiply(nights);
 
-        // Simple demo charges (change if your assignment has specific values)
+
         BigDecimal serviceCharge = subTotal.multiply(BigDecimal.valueOf(0.10));
         BigDecimal tax = subTotal.multiply(BigDecimal.valueOf(0.02));
         BigDecimal total = subTotal.add(serviceCharge).add(tax);
 
-        // Persist bill totals + keep payment status in DB
+
         Bill dbBill = new Bill();
         dbBill.setReservationId(r.getReservationId());
         dbBill.setSubTotal(scale(subTotal));

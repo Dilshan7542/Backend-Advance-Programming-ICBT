@@ -29,7 +29,6 @@ public class BillDaoImpl implements BillDao {
 
     @Override
     public void upsertTotals(Bill bill) throws Exception {
-        // Keep status/paid_at untouched on updates (so payment history is preserved)
         String sql = """
                 INSERT INTO bills (reservation_id, sub_total, service_charge, tax, total, status, paid_at)
                 VALUES (?,?,?,?,?, 'UNPAID', NULL)

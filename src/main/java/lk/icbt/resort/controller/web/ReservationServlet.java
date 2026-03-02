@@ -50,7 +50,7 @@ public class ReservationServlet extends HttpServlet {
 
             switch (path) {
                 case "/add" -> {
-                    // IMPORTANT: Do not show customers who already have a reservation
+                    // Do not show customers who already have a reservation
                     List<Customer> customers = ServiceFactory.customerService().getSelectableForReservation();
 
                     String checkInStr = req.getParameter("checkIn");
@@ -78,7 +78,7 @@ public class ReservationServlet extends HttpServlet {
                             req.setAttribute("checkOut", checkOutStr);
                         }
                     } else {
-                        // IMPORTANT FIX: do not show rooms until dates are selected
+
                         rooms = Collections.emptyList();
                         req.setAttribute("checkIn", checkInStr);
                     }
