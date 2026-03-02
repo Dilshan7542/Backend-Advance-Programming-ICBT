@@ -1,19 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>lk.icbt</groupId>
-  <artifactId>ocean-view-resort</artifactId>
-  <packaging>war</packaging>
-  <version>1.0.4</version>
-  <name>ocean-view-resort Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+    <groupId>lk.icbt</groupId>
+    <artifactId>ocean-view-resort</artifactId>
+    <packaging>war</packaging>
+    <version>1.0.4</version>
+    <name>ocean-view-resort Maven Webapp</name>
+    <url>http://maven.apache.org</url>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- ✅ Integration tests (Failsafe) are OFF by default -->
+        <skipITs>true</skipITs>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>jakarta.servlet</groupId>
@@ -41,20 +45,21 @@
             <version>8.4.0</version>
         </dependency>
 
-        <!-- JSON (for simple REST endpoints like /api/health) -->
+        <!-- JSON -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.11.0</version>
         </dependency>
 
-        <!-- JasperReports (PDF bill printing) -->
+        <!-- JasperReports -->
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
             <version>6.21.2</version>
         </dependency>
-        <!-- JAXB is not bundled with Java 17; Jasper compilation may require it -->
+
+        <!-- JAXB for Java 17 -->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
@@ -66,6 +71,7 @@
             <version>4.0.5</version>
         </dependency>
 
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -73,8 +79,10 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <finalName>ocean-view-resort</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -85,10 +93,40 @@
                     <includes>
                         <include>**/*Test.java</include>
                         <include>**/*Tests.java</include>
-                        <include>**/*IT.java</include>
                     </includes>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <useModulePath>false</useModulePath>
+                    <includes>
+                        <include>**/*IT.java</include>
+                    </includes>
+                    <skipITs>${skipITs}</skipITs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>it</id>
+            <properties>
+                <skipITs>false</skipITs>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>

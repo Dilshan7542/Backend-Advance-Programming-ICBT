@@ -13,7 +13,7 @@ public class AuthServiceIT {
     void login_withValidAdminCredentials_shouldReturnUser() throws Exception {
         TestDbSupport.assumeDbUp();
 
-        // schema.sql seeds: username=admin, password_hash=admin123
+        // schema.sql seeds: username=admin, password_hash=admin
         User user = ServiceFactory.authService().login("admin", "admin");
 
         assertNotNull(user);
